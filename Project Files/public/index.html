@@ -1,12 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Basic Layout</title>
+    <link href="/Styles/style.css" rel="stylesheet">
+    <link type="text/css" href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
+    <title>Project DAW</title>
 </head>
+
 <body>
-    We did it!
+    <div class="header container">
+        <h3>Project DAW</h3>
+        <div class="stay-right">
+            <a>Login</a>
+            <a>Register</a>
+        </div>
+    </div>
+    <div id="main-body" class="container">
+        <div class="sound-line container">
+            <h3 class="sound-name">Test 1</h3>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+        </div>
+        <div class="sound-line container">
+            <h3 class="sound-name">Test 2</h3>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+        </div>
+        <div class="sound-line container">
+            <h3 class="sound-name">Test 3</h3>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+        </div>
+        <div class="sound-line container">
+            <h3 class="sound-name">Test 4</h3>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+            <div class="sound-btn light-btn"></div>
+            <div class="sound-btn dark-btn"></div>
+        </div>
+    </div>
+    <div id="footer" class="container">
+        <h6 id="copyright">© Austin Sigler - All Rights Reserved</h6>
+        <div class="icon-container">
+            <i id="play-pause" class="fas fa-play fa-2x"></i>
+            <i id="stop" class="fas fa-stop fa-2x"></i>
+        </div>
+    </div>
+
+    <script>
+        document.body.onkeypress = function(evt) {
+            if(evt.keyCode == 32) {
+                if (playPauseBTN.className == `fas fa-play fa-2x`) {
+                    playPauseBTN.className = '';
+                    playPauseBTN.className = `fas fa-pause fa-2x`;
+                } else {
+                    playPauseBTN.className = '';
+                    playPauseBTN.className = `fas fa-play fa-2x`;
+                }
+            }
+        }
+        var playPauseBTN = document.getElementById(`play-pause`);
+        playPauseBTN.addEventListener('click', function (evt) {
+            if (playPauseBTN.className == `fas fa-play fa-2x`) {
+                playPauseBTN.className = '';
+                playPauseBTN.className = `fas fa-pause fa-2x`;
+            } else {
+                playPauseBTN.className = '';
+                playPauseBTN.className = `fas fa-play fa-2x`;
+            }
+        });
+
+        var stopBTN = document.getElementById(`stop`);
+        stopBTN.addEventListener('click', function(evt) {
+            playPauseBTN.className = '';
+            playPauseBTN.className = `fas fa-play fa-2x`;
+        })
+
+    </script>
 </body>
+
 </html>
