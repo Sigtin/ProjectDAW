@@ -22,48 +22,50 @@
     </div>
     <div id="main-body" class="container">
         <div class="sound-line container">
-            <h3 class="sound-name">Test 1</h3>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
+            <h3 class="sound-name">Bass Guitar</h3>
+            <div id="row1 col1" class="sound-btn dark-btn"></div>
+            <div id="row1 col2" class="sound-btn light-btn"></div>
+            <div id="row1 col3" class="sound-btn dark-btn"></div>
+            <div id="row1 col4" class="sound-btn light-btn"></div>
+            <div id="row1 col5" class="sound-btn dark-btn">
+            </div>
+            <div id="row1 col6" class="sound-btn light-btn"></div>
+            <div id="row1 col7" class="sound-btn dark-btn">
+            </div>
+            <div id="row1 col8" class="sound-btn light-btn"></div>
         </div>
         <div class="sound-line container">
-            <h3 class="sound-name">Test 2</h3>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
+            <h3 class="sound-name">Drum Loop</h3>
+            <div id="row2 col1" class="sound-btn light-btn"></div>
+            <div id="row2 col2" class="sound-btn dark-btn"></div>
+            <div id="row2 col3" class="sound-btn light-btn"></div>
+            <div id="row2 col4" class="sound-btn dark-btn"></div>
+            <div id="row2 col5" class="sound-btn light-btn"></div>
+            <div id="row2 col6" class="sound-btn dark-btn"></div>
+            <div id="row2 col7" class="sound-btn light-btn"></div>
+            <div id="row2 col8" class="sound-btn dark-btn"></div>
         </div>
         <div class="sound-line container">
-            <h3 class="sound-name">Test 3</h3>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
+            <h3 class="sound-name">Piano Solo</h3>
+            <div id="row3 col1" class="sound-btn dark-btn"></div>
+            <div id="row3 col2" class="sound-btn light-btn"></div>
+            <div id="row3 col3" class="sound-btn dark-btn"></div>
+            <div id="row3 col4" class="sound-btn light-btn"></div>
+            <div id="row3 col5" class="sound-btn dark-btn"></div>
+            <div id="row3 col6" class="sound-btn light-btn"></div>
+            <div id="row3 col7" class="sound-btn dark-btn"></div>
+            <div id="row3 col8" class="sound-btn light-btn"></div>
         </div>
         <div class="sound-line container">
-            <h3 class="sound-name">Test 4</h3>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
-            <div class="sound-btn light-btn"></div>
-            <div class="sound-btn dark-btn"></div>
+            <h3 class="sound-name">Vocal Progression</h3>
+            <div id="row4 col1" class="sound-btn light-btn"></div>
+            <div id="row4 col2" class="sound-btn dark-btn"></div>
+            <div id="row4 col3" class="sound-btn light-btn"></div>
+            <div id="row4 col4" class="sound-btn dark-btn"></div>
+            <div id="row4 col5" class="sound-btn light-btn"></div>
+            <div id="row4 col6" class="sound-btn dark-btn"></div>
+            <div id="row4 col7" class="sound-btn light-btn"></div>
+            <div id="row4 col8" class="sound-btn dark-btn"></div>
         </div>
     </div>
     <div id="footer" class="container">
@@ -74,35 +76,123 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.js"></script>
     <script>
-        document.body.onkeypress = function(evt) {
-            if(evt.keyCode == 32) {
-                if (playPauseBTN.className == `fas fa-play fa-2x`) {
-                    playPauseBTN.className = '';
-                    playPauseBTN.className = `fas fa-pause fa-2x`;
+        var sounds = [];
+        let sound = "";
+        let isPaused = false;
+        let songToPlay = '';
+
+        const checkRow = (row, btn) => {
+            if (sound == "") {
+                if (row == 1) {
+                    sound = new Howl({
+                        src: ["/Audio_Files/BassSound.wav"]
+                    });
+                } else if (row == 2) {
+                    sound = new Howl({
+                        src: ["/Audio_Files/DrumLoop.wav"]
+                    });
+                } else if (row == 3) {
+                    sound = new Howl({
+                        src: ["/Audio_Files/PianoThing.wav"]
+                    });
                 } else {
-                    playPauseBTN.className = '';
-                    playPauseBTN.className = `fas fa-play fa-2x`;
+                    sound = new Howl({
+                        src: ["/Audio_Files/VocalThing.wav"]
+                    });
                 }
+                sounds.push(sound);
+                sound = "";
             }
+            btn.classList.toggle("selected");
+            console.log("Clicked me");
         }
-        var playPauseBTN = document.getElementById(`play-pause`);
-        playPauseBTN.addEventListener('click', function (evt) {
+
+        for (let index = 1; index < 5; index++) {
+            for (let secondIndex = 1; secondIndex < 9; secondIndex++) {
+                let button = document.getElementById(`row${index} col${secondIndex}`)
+                // console.log(button);
+                button.addEventListener('click', function () {
+                    var row = index;
+                    checkRow(row, button);
+                });
+            }
+
+        }
+
+        const doEverything = () => {
             if (playPauseBTN.className == `fas fa-play fa-2x`) {
                 playPauseBTN.className = '';
                 playPauseBTN.className = `fas fa-pause fa-2x`;
+                if (sounds.length > 0) {
+                    let index = 0;
+                    if (!isPaused) {
+                        songToPlay = sounds[0];
+                    } else {
+                        isPaused = false;
+                    }
+                    sounds.forEach(function (song) {
+                        if (index < sounds.length) {
+                            song.on('end', function () {
+                                if (index + 1 < sounds.length) {
+                                    songToPlay = sounds[index + 1];
+                                    index++;
+                                    console.log(songToPlay);
+                                    playSong(songToPlay);
+                                } else {
+                                    playPauseBTN.className = '';
+                                    playPauseBTN.className = `fas fa-play fa-2x`;
+                                }
+                            });
+                        }
+                    });
+                    sounds[sounds.length - 1].on('end', function () {
+                        playPauseBTN.className = '';
+                        playPauseBTN.className = `fas fa-play fa-2x`;
+                    })
+                    console.log(songToPlay);
+                    playSong(songToPlay);
+                }
+                console.log(sounds);
             } else {
                 playPauseBTN.className = '';
                 playPauseBTN.className = `fas fa-play fa-2x`;
+                console.log(songToPlay);
+                pauseSong(songToPlay);
             }
-        });
+        }
+
+        const playSong = song => {
+            song.play();
+        }
+
+        const pauseSong = song => {
+            console.log('Song paused');
+            isPaused = true;
+            song.pause();
+        }
+
+        const stopSong = song => {
+            song.stop();
+            isPaused = false;
+        }
+
+        document.body.onkeypress = function (evt) {
+            if (evt.keyCode == 32) {
+                doEverything();
+            }
+        }
+        
+        var playPauseBTN = document.getElementById(`play-pause`);
+        playPauseBTN.addEventListener('click', doEverything);
 
         var stopBTN = document.getElementById(`stop`);
-        stopBTN.addEventListener('click', function(evt) {
+        stopBTN.addEventListener('click', function (evt) {
             playPauseBTN.className = '';
             playPauseBTN.className = `fas fa-play fa-2x`;
+            stopSong(songToPlay);
         })
-
     </script>
 </body>
 

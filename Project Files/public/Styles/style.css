@@ -185,6 +185,11 @@ i:hover {
     background: #ADD9F4;
 }
 
+.selected {
+    background: #984447;
+    border: 2px solid #FCFCFC;
+}
+
 #footer {
     width: 100%;
     background: #476C9B;
