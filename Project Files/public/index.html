@@ -123,8 +123,36 @@
         }
 
         const sortSoundsInOrder = () => {
-            sounds.sort(function(a, b){return a.Column - b.Column;});
+            sounds.sort(function (a, b) {
+                return a.Column - b.Column;
+            });
             console.log(sounds);
+            setUpFirstSound();
+        }
+
+        const setUpFirstSound = () => {
+            let index = 0;
+            songToPlay = sounds[0].Sound;
+            sounds.forEach(function (song) {
+                if (index < sounds.length) {
+                    song.Sound.on('end', function () {
+                        if (index + 1 < sounds.length) {
+                            songToPlay = sounds[index + 1].Sound;
+                            index++;
+                            // console.log(songToPlay);
+                            playSong(songToPlay);
+                        } else {
+                            playPauseBTN.className = '';
+                            playPauseBTN.className = `fas fa-play fa-2x`;
+                        }
+                    });
+                }
+            });
+            sounds[sounds.length - 1].Sound.on('end', function () {
+                playPauseBTN.className = '';
+                playPauseBTN.className = `fas fa-play fa-2x`;
+
+            })
         }
 
 
@@ -167,56 +195,31 @@
                 playPauseBTN.className = '';
                 playPauseBTN.className = `fas fa-pause fa-2x`;
                 if (sounds.length > 0) {
-                    let index = 0;
-                    if (!isPaused) {
-                        songToPlay = sounds[0].Sound;
-                    } else {
-                        isPaused = false;
-                    }
-                    sounds.forEach(function (song) {
-                        if (index < sounds.length) {
-                            song.Sound.on('end', function () {
-                                if (index + 1 < sounds.length) {
-                                    songToPlay = sounds[index + 1].Sound;
-                                    index++;
-                                    // console.log(songToPlay);
-                                    playSong(songToPlay);
-                                } else {
-                                    playPauseBTN.className = '';
-                                    playPauseBTN.className = `fas fa-play fa-2x`;
-                                }
-                            });
-                        }
-                    });
-                    sounds[sounds.length - 1].Sound.on('end', function () {
-                        playPauseBTN.className = '';
-                        playPauseBTN.className = `fas fa-play fa-2x`;
-
-                    })
-                    playSong(songToPlay);
+                    playSong();
                 }
                 // console.log(sounds);
             } else {
                 playPauseBTN.className = '';
                 playPauseBTN.className = `fas fa-play fa-2x`;
                 // console.log(songToPlay);
-                pauseSong(songToPlay);
+                pauseSong();
             }
         }
 
-        const playSong = song => {
-            song.play();
+        const playSong = () => {
+            songToPlay.play();
         }
 
-        const pauseSong = song => {
+        const pauseSong = () => {
             // console.log('Song paused');
-            isPaused = true;
-            song.pause();
+            // isPaused = true;
+            songToPlay.pause();
         }
 
-        const stopSong = song => {
-            song.stop();
-            isPaused = false;
+        const stopSong = () => {
+            songToPlay.stop();
+            // isPaused = false;
+            songToPlay = sounds[0].Sound;
         }
 
         document.body.onkeypress = function (evt) {
