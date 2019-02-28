@@ -67,6 +67,9 @@
             <div id="row4 col7" class="sound-btn light-btn"></div>
             <div id="row4 col8" class="sound-btn dark-btn"></div>
         </div>
+        <div class="edit-line container">
+            <div id="edit" class="edit-btn">Edit</div>
+        </div>
     </div>
     <div id="footer" class="container">
         <h6 id="copyright">© Austin Sigler - All Rights Reserved</h6>
@@ -83,17 +86,17 @@
         let isPaused = false;
         let songToPlay = '';
 
-        const checkRow = (row, btn) => {
+        const checkRow = btn => {
             if (sound == "") {
-                if (row == 1) {
+                if (btn.target.id[3] == 1) {
                     sound = new Howl({
                         src: ["/Audio_Files/BassSound.wav"]
                     });
-                } else if (row == 2) {
+                } else if (btn.target.id[3] == 2) {
                     sound = new Howl({
                         src: ["/Audio_Files/DrumLoop.wav"]
                     });
-                } else if (row == 3) {
+                } else if (btn.target.id[3] == 3) {
                     sound = new Howl({
                         src: ["/Audio_Files/PianoThing.wav"]
                     });
@@ -102,24 +105,43 @@
                         src: ["/Audio_Files/VocalThing.wav"]
                     });
                 }
+                console.log(sound);
                 sounds.push(sound);
                 sound = "";
             }
-            btn.classList.toggle("selected");
-            console.log("Clicked me");
+            btn.target.classList.toggle("selected");
+            // console.log(`${btn.target.id[3]}`);
         }
 
-        for (let index = 1; index < 5; index++) {
-            for (let secondIndex = 1; secondIndex < 9; secondIndex++) {
-                let button = document.getElementById(`row${index} col${secondIndex}`)
-                // console.log(button);
-                button.addEventListener('click', function () {
-                    var row = index;
-                    checkRow(row, button);
-                });
+
+        const addRemoveListener = mode => {
+                for (let index = 1; index < 5; index++) {
+                    for (let secondIndex = 1; secondIndex < 9; secondIndex++) {
+                        button = document.getElementById(`row${index} col${secondIndex}`)
+                        // console.log(button);
+                        button.classList.toggle('hover');
+                        // var checkRowListener = checkRow.bind(null, button);
+                        if(mode == 'add'){
+                            button.addEventListener('click', checkRow);
+                        } else {
+                            button.removeEventListener('click', checkRow);
+                            // console.log(button);
+                        }
+                    }
+                }
+        }
+
+        const editBTN = document.getElementById("edit");
+        editBTN.addEventListener('click', function(){
+            if(editBTN.innerHTML == "Edit") {
+                editBTN.innerHTML = "Done";
+                addRemoveListener('add');
+            } else {
+                editBTN.innerHTML = "Edit";
+                addRemoveListener('remove');
             }
-
-        }
+        });
+        
 
         const doEverything = () => {
             if (playPauseBTN.className == `fas fa-play fa-2x`) {

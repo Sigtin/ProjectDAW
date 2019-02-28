@@ -157,7 +157,7 @@ i:hover {
 
 .sound-line {
     flex: 1;
-    height: 150px;
+    height: 10%;
     width: 100%;
 }
 
@@ -172,7 +172,7 @@ i:hover {
     width: 10.625%;
 }
 
-.sound-btn:hover {
+.hover:hover, .edit-btn:hover {
     cursor: pointer;
     background: #984447;
 }
@@ -188,6 +188,20 @@ i:hover {
 .selected {
     background: #984447;
     border: 2px solid #FCFCFC;
+}
+
+.edit-line {
+    height: 10%;
+    align-self: center;
+}
+
+.edit-btn {
+    text-align: center;
+    background: gray;
+    color: #FCFCFC;
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 50px;
 }
 
 #footer {
