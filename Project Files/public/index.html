@@ -81,7 +81,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.js"></script>
     <script>
-        var sounds = [];
+        // let initialSounds = [];
+        let sounds = [];
         let sound = "";
         let isPaused = false;
         let songToPlay = '';
@@ -105,43 +106,61 @@
                         src: ["/Audio_Files/VocalThing.wav"]
                     });
                 }
-                console.log(sound);
-                sounds.push(sound);
+                // console.log(sound);
+                addToInitialSoundsList(sound, btn.target.id[btn.target.id.length - 1]);
                 sound = "";
             }
             btn.target.classList.toggle("selected");
             // console.log(`${btn.target.id[3]}`);
         }
 
+        const addToInitialSoundsList = (sound, colIndex) => {
+            sounds.push({
+                "Column": colIndex,
+                "Sound": sound
+            });
+            // console.log(sounds);
+        }
+
+        const sortSoundsInOrder = () => {
+            sounds.sort(function(a, b){return a.Column - b.Column;});
+            console.log(sounds);
+        }
+
 
         const addRemoveListener = mode => {
-                for (let index = 1; index < 5; index++) {
-                    for (let secondIndex = 1; secondIndex < 9; secondIndex++) {
-                        button = document.getElementById(`row${index} col${secondIndex}`)
-                        // console.log(button);
-                        button.classList.toggle('hover');
-                        // var checkRowListener = checkRow.bind(null, button);
-                        if(mode == 'add'){
-                            button.addEventListener('click', checkRow);
-                        } else {
-                            button.removeEventListener('click', checkRow);
-                            // console.log(button);
+            for (let index = 1; index < 5; index++) {
+                for (let secondIndex = 1; secondIndex < 9; secondIndex++) {
+                    button = document.getElementById(`row${index} col${secondIndex}`)
+                    // console.log(button);
+                    button.classList.toggle('hover');
+                    // var checkRowListener = checkRow.bind(null, button);
+                    if (mode == 'add') {
+                        if (button.classList.contains('selected')) {
+                            button.classList.remove('selected');
                         }
+                        sounds = [];
+                        button.addEventListener('click', checkRow);
+                    } else {
+                        button.removeEventListener('click', checkRow);
+                        // console.log(button);
                     }
                 }
+            }
         }
 
         const editBTN = document.getElementById("edit");
-        editBTN.addEventListener('click', function(){
-            if(editBTN.innerHTML == "Edit") {
+        editBTN.addEventListener('click', function () {
+            if (editBTN.innerHTML == "Edit") {
                 editBTN.innerHTML = "Done";
                 addRemoveListener('add');
             } else {
                 editBTN.innerHTML = "Edit";
                 addRemoveListener('remove');
+                sortSoundsInOrder();
             }
         });
-        
+
 
         const doEverything = () => {
             if (playPauseBTN.className == `fas fa-play fa-2x`) {
@@ -150,17 +169,17 @@
                 if (sounds.length > 0) {
                     let index = 0;
                     if (!isPaused) {
-                        songToPlay = sounds[0];
+                        songToPlay = sounds[0].Sound;
                     } else {
                         isPaused = false;
                     }
                     sounds.forEach(function (song) {
                         if (index < sounds.length) {
-                            song.on('end', function () {
+                            song.Sound.on('end', function () {
                                 if (index + 1 < sounds.length) {
-                                    songToPlay = sounds[index + 1];
+                                    songToPlay = sounds[index + 1].Sound;
                                     index++;
-                                    console.log(songToPlay);
+                                    // console.log(songToPlay);
                                     playSong(songToPlay);
                                 } else {
                                     playPauseBTN.className = '';
@@ -169,18 +188,18 @@
                             });
                         }
                     });
-                    sounds[sounds.length - 1].on('end', function () {
+                    sounds[sounds.length - 1].Sound.on('end', function () {
                         playPauseBTN.className = '';
                         playPauseBTN.className = `fas fa-play fa-2x`;
+
                     })
-                    console.log(songToPlay);
                     playSong(songToPlay);
                 }
-                console.log(sounds);
+                // console.log(sounds);
             } else {
                 playPauseBTN.className = '';
                 playPauseBTN.className = `fas fa-play fa-2x`;
-                console.log(songToPlay);
+                // console.log(songToPlay);
                 pauseSong(songToPlay);
             }
         }
@@ -190,7 +209,7 @@
         }
 
         const pauseSong = song => {
-            console.log('Song paused');
+            // console.log('Song paused');
             isPaused = true;
             song.pause();
         }
@@ -205,7 +224,7 @@
                 doEverything();
             }
         }
-        
+
         var playPauseBTN = document.getElementById(`play-pause`);
         playPauseBTN.addEventListener('click', doEverything);
 
