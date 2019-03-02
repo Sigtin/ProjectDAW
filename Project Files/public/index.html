@@ -83,9 +83,16 @@
     <script>
         // let initialSounds = [];
         let sounds = [];
+        let col1Sounds = [];
+        let col2Sounds = [];
+        let col3Sounds = [];
+        let col4Sounds = [];
+        let col5Sounds = [];
+        let col6Sounds = [];
+        let col7Sounds = [];
+        let col8Sounds = [];
         let sound = "";
-        let isPaused = false;
-        let songToPlay = '';
+        let soundsToPlay = [];
 
         const checkRow = btn => {
             if (sound == "") {
@@ -127,34 +134,83 @@
                 return a.Column - b.Column;
             });
             console.log(sounds);
-            setUpFirstSound();
+            setUpFirstSounds();
         }
 
-        const setUpFirstSound = () => {
-            let index = 0;
-            songToPlay = sounds[0].Sound;
+        const setUpFirstSounds = () => {
             sounds.forEach(function (song) {
-                if (index < sounds.length) {
-                    song.Sound.on('end', function () {
-                        if (index + 1 < sounds.length) {
-                            songToPlay = sounds[index + 1].Sound;
-                            index++;
-                            // console.log(songToPlay);
-                            playSong(songToPlay);
-                        } else {
-                            playPauseBTN.className = '';
-                            playPauseBTN.className = `fas fa-play fa-2x`;
-                        }
-                    });
+                if (song.Column == 1) {
+                    col1Sounds.push(song);
+                } else if (song.Column == 2) {
+                    col2Sounds.push(song);
+                } else if (song.Column == 3) {
+                    col3Sounds.push(song);
+                } else if (song.Column == 4) {
+                    col4Sounds.push(song);
+                } else if (song.Column == 5) {
+                    col5Sounds.push(song);
+                } else if (song.Column == 6) {
+                    col6Sounds.push(song);
+                } else if (song.Column == 7) {
+                    col7Sounds.push(song);
+                } else {
+                    col8Sounds.push(song);
                 }
             });
-            sounds[sounds.length - 1].Sound.on('end', function () {
-                playPauseBTN.className = '';
-                playPauseBTN.className = `fas fa-play fa-2x`;
 
-            })
+            setPlayOrder();
+            // let index = 0;
+            // songToPlay = sounds[0].Sound;
+            // sounds.forEach(function (song) {
+            //     if (index < sounds.length) {
+            //         song.Sound.on('end', function () {
+            //             if (index + 1 < sounds.length) {
+            //                 songToPlay = sounds[index + 1].Sound;
+            //                 index++;
+            //                 // console.log(songToPlay);
+            //                 // playSong(songToPlay);
+            //             } else {
+            //                 playPauseBTN.className = '';
+            //                 playPauseBTN.className = `fas fa-play fa-2x`;
+            //             }
+            //         });
+            //     }
+            // });
+            // sounds[sounds.length - 1].Sound.on('end', function () {
+            //     playPauseBTN.className = '';
+            //     playPauseBTN.className = `fas fa-play fa-2x`;
+
+            // })
         }
 
+        const setPlayOrder = () => {
+            for (let i = 1; i < 9; i++) {
+                if (i == 1) {
+                    let duration = 0;
+                    let index = 0;
+                    for (let j = 0; j < col1Sounds.length; j++) {
+                        soundDuration = checkDuration(col1Sounds[j].Sound);
+                        if (soundDuration > duration) {
+                            duration = soundDuration;
+                            index = j;
+                        }
+                    }
+
+                    col1Sounds[index].Sound.on('end', function () {
+                        soundsToPlay = col2Sounds
+                        playSong(soundsToPlay);
+                    });
+                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                }
+            }
+
+            soundsToPlay = col1Sounds;
+        }
+
+        const checkDuration = soundBit => {
+            console.log(soundBit._duration);
+            return soundBit._duration;
+        }
 
         const addRemoveListener = mode => {
             for (let index = 1; index < 5; index++) {
@@ -168,6 +224,14 @@
                             button.classList.remove('selected');
                         }
                         sounds = [];
+                        col1Sounds = [];
+                        col2Sounds = [];
+                        col3Sounds = [];
+                        col4Sounds = [];
+                        col5Sounds = [];
+                        col6Sounds = [];
+                        col7Sounds = [];
+                        col8Sounds = [];
                         button.addEventListener('click', checkRow);
                     } else {
                         button.removeEventListener('click', checkRow);
@@ -189,37 +253,44 @@
             }
         });
 
-
+        // Set up boolean to see what col array to pass into the playSong function
         const doEverything = () => {
             if (playPauseBTN.className == `fas fa-play fa-2x`) {
                 playPauseBTN.className = '';
                 playPauseBTN.className = `fas fa-pause fa-2x`;
-                if (sounds.length > 0) {
-                    playSong();
-                }
+                playSong(soundsToPlay);
                 // console.log(sounds);
             } else {
                 playPauseBTN.className = '';
                 playPauseBTN.className = `fas fa-play fa-2x`;
                 // console.log(songToPlay);
-                pauseSong();
+                pauseSong(soundsToPlay);
             }
         }
 
-        const playSong = () => {
-            songToPlay.play();
+        const playSong = array => {
+            array.forEach(function (sound) {
+                sound.Sound.play();
+            })
         }
 
-        const pauseSong = () => {
+        const pauseSong = array => {
             // console.log('Song paused');
             // isPaused = true;
-            songToPlay.pause();
+            array.forEach(function (sound) {
+                if(sound.Sound.playing()) {
+                    sound.Sound.pause();
+                }
+            })
         }
 
-        const stopSong = () => {
-            songToPlay.stop();
+        const stopSong = array => {
+            array.forEach(function (sound) {
+                sound.Sound.stop();
+            })
             // isPaused = false;
-            songToPlay = sounds[0].Sound;
+            // songToPlay = sounds[0].Sound;
+            soundsToPlay = col1Sounds;
         }
 
         document.body.onkeypress = function (evt) {
@@ -235,7 +306,7 @@
         stopBTN.addEventListener('click', function (evt) {
             playPauseBTN.className = '';
             playPauseBTN.className = `fas fa-play fa-2x`;
-            stopSong(songToPlay);
+            stopSong(soundsToPlay);
         })
     </script>
 </body>
