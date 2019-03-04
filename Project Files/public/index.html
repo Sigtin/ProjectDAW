@@ -201,6 +201,118 @@
                         playSong(soundsToPlay);
                     });
                     console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                } else if (i == 2) {
+                    let duration = 0;
+                    let index = 0;
+                    for (let j = 0; j < col2Sounds.length; j++) {
+                        soundDuration = checkDuration(col2Sounds[j].Sound);
+                        if (soundDuration > duration) {
+                            duration = soundDuration;
+                            index = j;
+                        }
+                    }
+
+                    col2Sounds[index].Sound.on('end', function () {
+                        soundsToPlay = col3Sounds
+                        playSong(soundsToPlay);
+                    });
+                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                } else if (i == 3) {
+                    let duration = 0;
+                    let index = 0;
+                    for (let j = 0; j < col3Sounds.length; j++) {
+                        soundDuration = checkDuration(col3Sounds[j].Sound);
+                        if (soundDuration > duration) {
+                            duration = soundDuration;
+                            index = j;
+                        }
+                    }
+
+                    col3Sounds[index].Sound.on('end', function () {
+                        soundsToPlay = col4Sounds
+                        playSong(soundsToPlay);
+                    });
+                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                } else if (i == 4) {
+                    let duration = 0;
+                    let index = 0;
+                    for (let j = 0; j < col4Sounds.length; j++) {
+                        soundDuration = checkDuration(col4Sounds[j].Sound);
+                        if (soundDuration > duration) {
+                            duration = soundDuration;
+                            index = j;
+                        }
+                    }
+
+                    col4Sounds[index].Sound.on('end', function () {
+                        soundsToPlay = col5Sounds
+                        playSong(soundsToPlay);
+                    });
+                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                } else if (i == 5) {
+                    let duration = 0;
+                    let index = 0;
+                    for (let j = 0; j < col5Sounds.length; j++) {
+                        soundDuration = checkDuration(col5Sounds[j].Sound);
+                        if (soundDuration > duration) {
+                            duration = soundDuration;
+                            index = j;
+                        }
+                    }
+
+                    col5Sounds[index].Sound.on('end', function () {
+                        soundsToPlay = col6Sounds
+                        playSong(soundsToPlay);
+                    });
+                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                } else if (i == 6) {
+                    let duration = 0;
+                    let index = 0;
+                    for (let j = 0; j < col6Sounds.length; j++) {
+                        soundDuration = checkDuration(col6Sounds[j].Sound);
+                        if (soundDuration > duration) {
+                            duration = soundDuration;
+                            index = j;
+                        }
+                    }
+
+                    col6Sounds[index].Sound.on('end', function () {
+                        soundsToPlay = col7Sounds
+                        playSong(soundsToPlay);
+                    });
+                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                } else if (i == 7) {
+                    let duration = 0;
+                    let index = 0;
+                    for (let j = 0; j < col7Sounds.length; j++) {
+                        soundDuration = checkDuration(col7Sounds[j].Sound);
+                        if (soundDuration > duration) {
+                            duration = soundDuration;
+                            index = j;
+                        }
+                    }
+
+                    col7Sounds[index].Sound.on('end', function () {
+                        soundsToPlay = col8Sounds
+                        playSong(soundsToPlay);
+                    });
+                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                } else if (i == 8) {
+                    let duration = 0;
+                    let index = 0;
+                    for (let j = 0; j < col8Sounds.length; j++) {
+                        soundDuration = checkDuration(col8Sounds[j].Sound);
+                        if (soundDuration > duration) {
+                            duration = soundDuration;
+                            index = j;
+                        }
+                    }
+
+                    col8Sounds[index].Sound.on('end', function () {
+                        playPauseBTN.className = '';
+                        playPauseBTN.className = `fas fa-play fa-2x`;
+                    });
+                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
                 }
             }
 
