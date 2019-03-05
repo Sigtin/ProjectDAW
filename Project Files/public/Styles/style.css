@@ -187,6 +187,7 @@ i:hover {
 
 .selected {
     background: #984447;
+    height: 146px;
     border: 2px solid #FCFCFC;
 }
 

@@ -22,7 +22,7 @@
     </div>
     <div id="main-body" class="container">
         <div class="sound-line container">
-            <h3 class="sound-name">Bass Guitar</h3>
+            <h3 class="sound-name">House Bass</h3>
             <div id="row1 col1" class="sound-btn dark-btn"></div>
             <div id="row1 col2" class="sound-btn light-btn"></div>
             <div id="row1 col3" class="sound-btn dark-btn"></div>
@@ -35,7 +35,7 @@
             <div id="row1 col8" class="sound-btn light-btn"></div>
         </div>
         <div class="sound-line container">
-            <h3 class="sound-name">Drum Loop</h3>
+            <h3 class="sound-name">House Drums</h3>
             <div id="row2 col1" class="sound-btn light-btn"></div>
             <div id="row2 col2" class="sound-btn dark-btn"></div>
             <div id="row2 col3" class="sound-btn light-btn"></div>
@@ -46,7 +46,7 @@
             <div id="row2 col8" class="sound-btn dark-btn"></div>
         </div>
         <div class="sound-line container">
-            <h3 class="sound-name">Piano Solo</h3>
+            <h3 class="sound-name">Sweep FX</h3>
             <div id="row3 col1" class="sound-btn dark-btn"></div>
             <div id="row3 col2" class="sound-btn light-btn"></div>
             <div id="row3 col3" class="sound-btn dark-btn"></div>
@@ -57,7 +57,7 @@
             <div id="row3 col8" class="sound-btn light-btn"></div>
         </div>
         <div class="sound-line container">
-            <h3 class="sound-name">Vocal Progression</h3>
+            <h3 class="sound-name">House Synth</h3>
             <div id="row4 col1" class="sound-btn light-btn"></div>
             <div id="row4 col2" class="sound-btn dark-btn"></div>
             <div id="row4 col3" class="sound-btn light-btn"></div>
@@ -98,19 +98,19 @@
             if (sound == "") {
                 if (btn.target.id[3] == 1) {
                     sound = new Howl({
-                        src: ["/Audio_Files/BassSound.wav"]
+                        src: ["/Audio_Files/HouseBass05DoepferG.wav"]
                     });
                 } else if (btn.target.id[3] == 2) {
                     sound = new Howl({
-                        src: ["/Audio_Files/DrumLoop.wav"]
+                        src: ["/Audio_Files/HouseDrums08.wav"]
                     });
                 } else if (btn.target.id[3] == 3) {
                     sound = new Howl({
-                        src: ["/Audio_Files/PianoThing.wav"]
+                        src: ["/Audio_Files/HouseFXSweep04.wav"]
                     });
                 } else {
                     sound = new Howl({
-                        src: ["/Audio_Files/VocalThing.wav"]
+                        src: ["/Audio_Files/HouseSynth04G.wav"]
                     });
                 }
                 // console.log(sound);
