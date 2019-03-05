@@ -196,10 +196,12 @@
                         }
                     }
 
-                    col1Sounds[index].Sound.on('end', function () {
-                        soundsToPlay = col2Sounds
-                        playSong(soundsToPlay);
-                    });
+                    if (col1Sounds.length > 0) {
+                        col1Sounds[index].Sound.on('end', function () {
+                            soundsToPlay = col2Sounds
+                            playSong(soundsToPlay);
+                        });
+                    }
                     console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
                 } else if (i == 2) {
                     let duration = 0;
@@ -212,11 +214,13 @@
                         }
                     }
 
-                    col2Sounds[index].Sound.on('end', function () {
-                        soundsToPlay = col3Sounds
-                        playSong(soundsToPlay);
-                    });
-                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                    if (col2Sounds.length > 0) {
+                        col2Sounds[index].Sound.on('end', function () {
+                            soundsToPlay = col3Sounds
+                            playSong(soundsToPlay);
+                        });
+                    }
+                    console.log(`Longest Col2 Sound is ${duration} at index ${index}`);
                 } else if (i == 3) {
                     let duration = 0;
                     let index = 0;
@@ -228,11 +232,13 @@
                         }
                     }
 
-                    col3Sounds[index].Sound.on('end', function () {
-                        soundsToPlay = col4Sounds
-                        playSong(soundsToPlay);
-                    });
-                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                    if (col3Sounds.length > 0) {
+                        col3Sounds[index].Sound.on('end', function () {
+                            soundsToPlay = col4Sounds
+                            playSong(soundsToPlay);
+                        });
+                    }
+                    console.log(`Longest Col3 Sound is ${duration} at index ${index}`);
                 } else if (i == 4) {
                     let duration = 0;
                     let index = 0;
@@ -244,11 +250,13 @@
                         }
                     }
 
-                    col4Sounds[index].Sound.on('end', function () {
-                        soundsToPlay = col5Sounds
-                        playSong(soundsToPlay);
-                    });
-                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                    if (col4Sounds.length > 0) {
+                        col4Sounds[index].Sound.on('end', function () {
+                            soundsToPlay = col5Sounds
+                            playSong(soundsToPlay);
+                        });
+                    }
+                    console.log(`Longest Col4 Sound is ${duration} at index ${index}`);
                 } else if (i == 5) {
                     let duration = 0;
                     let index = 0;
@@ -260,11 +268,13 @@
                         }
                     }
 
-                    col5Sounds[index].Sound.on('end', function () {
-                        soundsToPlay = col6Sounds
-                        playSong(soundsToPlay);
-                    });
-                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                    if (col5Sounds.length > 0) {
+                        col5Sounds[index].Sound.on('end', function () {
+                            soundsToPlay = col6Sounds
+                            playSong(soundsToPlay);
+                        });
+                    }
+                    console.log(`Longest Col5 Sound is ${duration} at index ${index}`);
                 } else if (i == 6) {
                     let duration = 0;
                     let index = 0;
@@ -276,11 +286,13 @@
                         }
                     }
 
-                    col6Sounds[index].Sound.on('end', function () {
-                        soundsToPlay = col7Sounds
-                        playSong(soundsToPlay);
-                    });
-                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                    if (col6Sounds.length > 0) {
+                        col6Sounds[index].Sound.on('end', function () {
+                            soundsToPlay = col7Sounds
+                            playSong(soundsToPlay);
+                        });
+                    }
+                    console.log(`Longest Col6 Sound is ${duration} at index ${index}`);
                 } else if (i == 7) {
                     let duration = 0;
                     let index = 0;
@@ -292,11 +304,13 @@
                         }
                     }
 
-                    col7Sounds[index].Sound.on('end', function () {
-                        soundsToPlay = col8Sounds
-                        playSong(soundsToPlay);
-                    });
-                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                    if (col7Sounds.length > 0) {
+                        col7Sounds[index].Sound.on('end', function () {
+                            soundsToPlay = col8Sounds
+                            playSong(soundsToPlay);
+                        });
+                    }
+                    console.log(`Longest Col7 Sound is ${duration} at index ${index}`);
                 } else if (i == 8) {
                     let duration = 0;
                     let index = 0;
@@ -308,11 +322,13 @@
                         }
                     }
 
-                    col8Sounds[index].Sound.on('end', function () {
-                        playPauseBTN.className = '';
-                        playPauseBTN.className = `fas fa-play fa-2x`;
-                    });
-                    console.log(`Longest Col1 Sound is ${duration} at index ${index}`);
+                    if (col8Sounds.length > 0) {
+                        col8Sounds[index].Sound.on('end', function () {
+                            playPauseBTN.className = '';
+                            playPauseBTN.className = `fas fa-play fa-2x`;
+                        });
+                    }
+                    console.log(`Longest Col8 Sound is ${duration} at index ${index}`);
                 }
             }
 
@@ -390,7 +406,7 @@
             // console.log('Song paused');
             // isPaused = true;
             array.forEach(function (sound) {
-                if(sound.Sound.playing()) {
+                if (sound.Sound.playing()) {
                     sound.Sound.pause();
                 }
             })
