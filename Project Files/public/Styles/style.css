@@ -191,6 +191,10 @@ i:hover {
     border: 2px solid #FCFCFC;
 }
 
+.playing { 
+    background: #fffa2b;
+}
+
 .edit-line {
     height: 10%;
     align-self: center;

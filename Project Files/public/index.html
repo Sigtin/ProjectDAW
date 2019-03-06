@@ -159,28 +159,18 @@
             });
 
             setPlayOrder();
-            // let index = 0;
-            // songToPlay = sounds[0].Sound;
-            // sounds.forEach(function (song) {
-            //     if (index < sounds.length) {
-            //         song.Sound.on('end', function () {
-            //             if (index + 1 < sounds.length) {
-            //                 songToPlay = sounds[index + 1].Sound;
-            //                 index++;
-            //                 // console.log(songToPlay);
-            //                 // playSong(songToPlay);
-            //             } else {
-            //                 playPauseBTN.className = '';
-            //                 playPauseBTN.className = `fas fa-play fa-2x`;
-            //             }
-            //         });
-            //     }
-            // });
-            // sounds[sounds.length - 1].Sound.on('end', function () {
-            //     playPauseBTN.className = '';
-            //     playPauseBTN.className = `fas fa-play fa-2x`;
+        }
 
-            // })
+        const togglePlaying = (col, stopPlaying) => {
+            console.log(`Col: ${col}, Type of Variable: ${typeof col}`);
+            for (let row = 1; row < 5; row++) {
+                button = document.getElementById(`row${row} col${col}`);
+                if (button.classList.contains("selected") && !button.classList.contains("playing") && !stopPlaying) {
+                    button.classList.add('playing');
+                } else if(button.classList.contains('playing') && stopPlaying) {
+                    button.classList.remove('playing');
+                }
+            }
         }
 
         const setPlayOrder = () => {
@@ -198,6 +188,7 @@
 
                     if (col1Sounds.length > 0) {
                         col1Sounds[index].Sound.on('end', function () {
+                            togglePlaying(1, true);
                             soundsToPlay = col2Sounds
                             playSong(soundsToPlay);
                         });
@@ -216,6 +207,7 @@
 
                     if (col2Sounds.length > 0) {
                         col2Sounds[index].Sound.on('end', function () {
+                            togglePlaying(2, true);
                             soundsToPlay = col3Sounds
                             playSong(soundsToPlay);
                         });
@@ -234,6 +226,7 @@
 
                     if (col3Sounds.length > 0) {
                         col3Sounds[index].Sound.on('end', function () {
+                            togglePlaying(3, true);
                             soundsToPlay = col4Sounds
                             playSong(soundsToPlay);
                         });
@@ -252,6 +245,8 @@
 
                     if (col4Sounds.length > 0) {
                         col4Sounds[index].Sound.on('end', function () {
+                            togglePlaying(4, true);
+
                             soundsToPlay = col5Sounds
                             playSong(soundsToPlay);
                         });
@@ -270,6 +265,8 @@
 
                     if (col5Sounds.length > 0) {
                         col5Sounds[index].Sound.on('end', function () {
+                            togglePlaying(5, true);
+
                             soundsToPlay = col6Sounds
                             playSong(soundsToPlay);
                         });
@@ -288,6 +285,7 @@
 
                     if (col6Sounds.length > 0) {
                         col6Sounds[index].Sound.on('end', function () {
+                            togglePlaying(6, true);
                             soundsToPlay = col7Sounds
                             playSong(soundsToPlay);
                         });
@@ -306,6 +304,7 @@
 
                     if (col7Sounds.length > 0) {
                         col7Sounds[index].Sound.on('end', function () {
+                            togglePlaying(7, true);
                             soundsToPlay = col8Sounds
                             playSong(soundsToPlay);
                         });
@@ -324,6 +323,7 @@
 
                     if (col8Sounds.length > 0) {
                         col8Sounds[index].Sound.on('end', function () {
+                            togglePlaying(8, true);
                             playPauseBTN.className = '';
                             playPauseBTN.className = `fas fa-play fa-2x`;
                         });
@@ -350,6 +350,9 @@
                     if (mode == 'add') {
                         if (button.classList.contains('selected')) {
                             button.classList.remove('selected');
+                        }
+                        if (button.classList.contains('playing')) {
+                            button.classList.remove('playing');
                         }
                         sounds = [];
                         col1Sounds = [];
@@ -398,6 +401,7 @@
 
         const playSong = array => {
             array.forEach(function (sound) {
+                togglePlaying(parseInt(sound.Column), false);
                 sound.Sound.play();
             })
         }
@@ -408,12 +412,14 @@
             array.forEach(function (sound) {
                 if (sound.Sound.playing()) {
                     sound.Sound.pause();
+                    togglePlaying(parseInt(sound.Column), true);
                 }
             })
         }
 
         const stopSong = array => {
             array.forEach(function (sound) {
+                togglePlaying(parseInt(sound.Column), true);
                 sound.Sound.stop();
             })
             // isPaused = false;
